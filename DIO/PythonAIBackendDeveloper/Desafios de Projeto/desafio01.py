@@ -22,7 +22,7 @@ TERMINAL_WIDTH = shutil.get_terminal_size()[0]
 
 while True:
     os.system("clear") if os.name == "posix" else os.system("cls")
-    print("MENU DE OPERAÇÕES".center(TERMINAL_WIDTH, "#"))
+    print(" MENU DE OPERAÇÕES ".center(TERMINAL_WIDTH, "#"))
     option = input(menu).lower()
 
     match option:
@@ -107,11 +107,44 @@ while True:
             print(f"Saldo: R$ {balance:.2f}.")
 
             print("#"*TERMINAL_WIDTH)
-            input()
+            input("\nPressione ENTER para retornar ao menu de operações.")
         case "q":
-            break
+            response = None
+
+            while response is None:
+                os.system("clear") if os.name == "posix" else os.system("cls")
+                print(
+                    " Sair do Sistema Bancário ".center(TERMINAL_WIDTH, "#",)
+                )
+
+                response = input(
+                    "\nDeseja realmente finalizar as operações? "
+                    "[s-sim/N-não] => "
+                ).lower()
+
+                match response:
+                    case "s":
+                        break
+                    case "n":
+                        break
+                    case "":
+                        break
+                    case _:
+                        print(
+                            "\nOpção inválida!!! "
+                            "Selecione apenas opções válidas."
+                        )
+                        time.sleep(MESSAGE_TIME)
+                        response = None
+
+            if response == "s":
+                print("\nAguardamos seu retorno! Até a próxima!")
+                time.sleep(MESSAGE_TIME)
+                os.system("clear") if os.name == "posix" else os.system("cls")
+                break
         case _:
             print(
                 "Operação inválida!!! "
                 "Selecione apenas operações válidas no menu de opções."
             )
+            time.sleep(MESSAGE_TIME)
